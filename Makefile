@@ -12,4 +12,4 @@ blfcrack: $(OBJS)
 	$(CC) $(LDFLAGS) $(OBJS) -o $@ 
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) blfcrack
