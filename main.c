@@ -5,11 +5,12 @@
 
 #include "bcrypt.h"
 
-#define _PASSWORD_LEN     128             /* max length, not counting NUL */
+#define MAX_PASSWORD_SIZE     60
+#define _PASSWORD_LEN         128             /* max length, not counting NUL */
 #define MAX_USERNAME_LENGTH   60
-#define C_SALT_SIZE       16
-#define SALT_SIZE       C_SALT_SIZE * 4 / 3     /* base64encoded */
-#define HASH_SIZE       (7 + (16 * 4 + 2) / 3 + 1)
+#define C_SALT_SIZE           16
+#define SALT_SIZE             C_SALT_SIZE * 4 / 3     /* base64encoded */
+#define HASH_SIZE             (7 + (16 * 4 + 2) / 3 + 1)
 
 
 static void abort_with_usage() {
@@ -99,8 +100,13 @@ int main(int argc, char* argv[]) {
   }
   fclose(passwords);
 
-  while ((read = getline(&line, &line_len, dictionary)) != -1) {
-    for (i = 0; i < password_count; i++) {      
+    
+  while ((read = getline(&line, &line_len, dictionary)) != -1) {    
+      
+    line[read-1] = '\0';
+
+    for (i = 0; i < password_count; i++) {    
+
       if ( 0 == bcrypt_checkpass(line, hashes[i]) ) {
         printf("%s: %s=>%s\n", usernames[i], line, hashes[i]);
         continue;
