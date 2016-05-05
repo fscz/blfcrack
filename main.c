@@ -20,9 +20,6 @@ static void abort_with_usage() {
 
 int main(int argc, char* argv[]) {
 
-  //char* foohash = "$2b$08$GrRLT9rm6XkPjccN4jEor.kdgsIPQ1jccP3aP/k1u/Z0N51CGy5Ai";
-  //char* fsczhash = "$2b$09$w1QtQlKNsIpcVfKXR6sxou1RAt8jDREorXEpbi1QePrCMgIR.wysK";  
-
   char h[128];
 
   char* dictionary_file = NULL;
@@ -108,7 +105,7 @@ int main(int argc, char* argv[]) {
     for (i = 0; i < password_count; i++) {    
 
       if ( 0 == bcrypt_checkpass(line, hashes[i]) ) {
-        printf("%s: %s=>%s\n", usernames[i], line, hashes[i]);
+        printf("%s: %s => %s\n", usernames[i], line, hashes[i]);
         continue;
       }
       i++;
