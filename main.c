@@ -84,12 +84,12 @@ int main(int argc, char* argv[]) {
   char hashes[password_count][_PASSWORD_LEN];
 
   char* line = NULL;
-  size_t line_len = 0;
+  size_t lptr = 0;
   int read = 0;
   int i = 0;
 
   char* token;
-  while ((read = getline(&line, &line_len, passwords)) != -1) {    
+  while ((read = getline(&line, &lptr, passwords)) != -1) {    
     token = strtok(line, ":");
     strcpy(usernames[i], token);
 
@@ -101,8 +101,8 @@ int main(int argc, char* argv[]) {
   fclose(passwords);
 
     
-  while ((read = getline(&line, &line_len, dictionary)) != -1) {    
-      
+  while ((read = getline(&line, &lptr, dictionary)) != -1) {    
+
     line[read-1] = '\0';
 
     for (i = 0; i < password_count; i++) {    
